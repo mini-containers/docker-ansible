@@ -1,0 +1,24 @@
+---
+language: bash
+services: docker
+
+env:
+  - VERSION=2.4
+  - VERSION=2.3
+  - VERSION=2.2
+
+before_script:
+  - env | sort
+  - cd "$VERSION"
+  - image="mini/ansible:${VERSION}"
+
+script:
+  - |
+    (
+      set -Eeuo pipefail
+      set -x
+      travis_retry docker build -t "$image" .
+    )
+
+after_script:
+  - docker images
