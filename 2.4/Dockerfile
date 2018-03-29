@@ -12,7 +12,9 @@ RUN set -ex \
                 openssh-client \
                 openssl
 
-# install build dependencies, pip ansible and then remove them
+# 1. install build dependencies, then pip ansible.
+# 2. detect any compiled extension that requires runtime dependencies.
+# (copied from official Docker's Python image)
 RUN set -ex \
         && apk add --no-cache --virtual .build-deps \
                 gcc \
@@ -24,8 +26,6 @@ RUN set -ex \
         && pip install --upgrade --no-cache-dir \
                 ansible==$ANSIBLE_VERSION \
                 passlib \
-# detect any compiled extension that requires runtime dependencies
-# copied from official Python image
         && runDeps="$( \
                 scanelf --needed --nobanner --format '%n#p' --recursive /usr/local \
                         | tr ',' '\n' \
