@@ -6,10 +6,10 @@ env:
   - VERSION=2.4
   - VERSION=2.3
   - VERSION=2.2
+  - VERSION=1.9
 
 before_script:
   - env | sort
-  - cd "$VERSION"
   - image="mini/ansible:${VERSION}"
 
 script:
@@ -17,7 +17,7 @@ script:
     (
       set -Eeuo pipefail
       set -x
-      travis_retry docker build -t "$image" .
+      travis_retry docker build -t "$image" $VERSION
     )
 
 after_script:
