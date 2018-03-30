@@ -102,15 +102,26 @@ As convenience to reduce typing, an script is provided within
 [wrappers](wrappers) directory.
 
 Simply copy [`docker-ansible`](wrapper/docker-ansible) into your project's
-`bin` directory and customize it for your needs.
+`bin` directory and customize it to your needs.
 
 By default, the wrapper will:
 
-1. Mount current user `known_hosts`
-2. Mount project directory (parent of `bin` one) as `/data`
-3. If `PKEY` variable is found, will mount as default SSH key
+1. Use `latest` version of `mini/ansible` image.
+2. Mount current user `known_hosts`
+3. Mount project directory (parent of `bin` one) as `/data`
+4. If `PKEY` variable is found, will mount as default SSH key
 
-Check the comments at the top of the script for the available options.
+Check the comments at the top of the script for available options.
+
+#### Example
+
+Within your project, run `deploy` playbook with `xyz.pem` key:
+
+```shell
+$ cd project
+
+$ PKEY=~/.ssh/xyz.pem bin/ansible playbook -i hosts.ini deploy.yml
+```
 
 ## Caveats
 
