@@ -8,6 +8,11 @@ env:
   - VERSION=2.2
   - VERSION=1.9
 
+before_install:
+  - sudo add-apt-repository ppa:duggan/bats --yes
+  - sudo apt-get update -qq
+  - sudo apt-get install -qq bats
+
 before_script:
   - env | sort
   - image="mini/ansible:${VERSION}"
@@ -18,6 +23,7 @@ script:
       set -Eeuo pipefail
       set -x
       travis_retry docker build -t "$image" $VERSION
+      IMAGE=$image VERSION=$VERSION bats tests/
     )
 
 after_script:
