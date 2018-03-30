@@ -22,7 +22,7 @@ script:
     (
       set -Eeuo pipefail
       set -x
-      travis_retry docker build -t "$image" $VERSION
+      travis_retry docker build -t "$image" $VERSION/
       IMAGE=$image VERSION=$VERSION bats tests/
     )
 
