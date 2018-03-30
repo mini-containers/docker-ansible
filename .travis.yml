@@ -3,7 +3,7 @@ language: bash
 services: docker
 
 env:
-  - VERSION=2.4
+  - VERSION=2.4 LATEST=true
   - VERSION=2.3
   - VERSION=2.2
   - VERSION=1.9
@@ -28,3 +28,15 @@ script:
 
 after_script:
   - docker images
+
+deploy:
+  - provider: script
+    on:
+      branch: master
+    script:
+      - |
+        (
+          if [ "$LATEST" == "true" ]; then
+            docker tag ${image/$VERSION/latest} $image
+          fi
+        )
