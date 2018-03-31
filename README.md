@@ -5,6 +5,8 @@ Alpine-powered container for [Ansible](https://github.com/ansible/ansible)
 Avoid having to install Python, pip, virtualenv and others to be able to
 provision servers using Ansible.
 
+[![Build Status](https://travis-ci.org/mini-containers/docker-ansible.svg?branch=master)](https://travis-ci.org/mini-containers/docker-ansible)
+
 ## Usage
 
 You can simply run this container using `docker run`:
