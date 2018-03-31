@@ -15,15 +15,15 @@ before_install:
 
 before_script:
   - env | sort
-  - image="mini/ansible:${VERSION}"
+  - export IMAGE="mini/ansible:${VERSION}"
 
 script:
   - |
     (
       set -Eeuo pipefail
       set -x
-      travis_retry docker build -t "$image" $VERSION/
-      IMAGE=$image VERSION=$VERSION bats tests/
+      travis_retry docker build -t "$IMAGE" $VERSION/
+      IMAGE=$IMAGE VERSION=$VERSION bats tests/
     )
 
 after_script:
@@ -31,12 +31,6 @@ after_script:
 
 deploy:
   - provider: script
+    script: bash scripts/deploy.sh
     on:
       branch: master
-    script:
-      - |
-        (
-          if [ "$LATEST" == "true" ]; then
-            docker tag ${image/$VERSION/latest} $image
-          fi
-        )
