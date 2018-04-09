@@ -12,6 +12,18 @@
 #
 # Is recommended you place this script in `bin` directory of your project,
 # which then will find the relative parent directory from it.
+#
+# Examples:
+#
+#   # Provide a private key
+#   $ PKEY=~/my-key.pem bin/ansible playbook -i hosts.ini playbook.yml
+#
+#   # Ask for vault password
+#   $ PKEY=... bin/ansible playbook -i hosts.ini deploy.yml --ask-vault-pass
+#
+#   # Encrypt string for vault
+#   $ bin/ansible vault encrypt_string <value> --ask-vault-pass
+#
 
 ### START: configurable options
 
