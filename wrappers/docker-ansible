@@ -178,8 +178,12 @@ SCRIPT_PARENT=$(dirname $SCRIPT_DIR)
 # detect ansible version or use default
 ANSIBLE_VERSION=${ANSIBLE_VERSION:-$DEFAULT_VERSION}
 
-# detect if play, playbook or vault is requested
+# detect if galaxy, play|playbook or vault is requested
 case $1 in
+    galaxy)
+        CMD="ansible-galaxy"
+        shift
+        ;;
     play|playbook)
         CMD="ansible-playbook"
         shift
