@@ -4,7 +4,7 @@ FROM python:2-alpine3.7
 # default playbook directory
 WORKDIR /data
 
-ENV ANSIBLE_VERSION 2.4.3
+ENV ANSIBLE_VERSION 2.4.4
 
 # install general runtime dependencies
 RUN set -ex \
