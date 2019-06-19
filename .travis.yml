@@ -12,7 +12,6 @@ before_install:
   - sudo apt-get install -qq bats
 
 before_script:
-  - env | sort
   - export IMAGE="mini/ansible:${VERSION}"
 
 script:
@@ -20,7 +19,8 @@ script:
     (
       set -Eeuo pipefail
       set -x
-      travis_retry docker build -t "$IMAGE" $VERSION/
+      docker pull "$IMAGE"
+      travis_retry docker build --cache-from "$IMAGE" -t "$IMAGE" $VERSION/
       IMAGE=$IMAGE VERSION=$VERSION bats tests/
     )
 
