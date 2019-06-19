@@ -19,7 +19,7 @@ script:
     (
       set -Eeuo pipefail
       set -x
-      docker pull "$IMAGE"
+      docker pull "$IMAGE" || true
       travis_retry docker build --cache-from "$IMAGE" -t "$IMAGE" $VERSION/
       IMAGE=$IMAGE VERSION=$VERSION bats tests/
     )
