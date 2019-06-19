@@ -3,7 +3,8 @@ language: bash
 services: docker
 
 env:
-  - VERSION=2.5 LATEST=true
+  - VERSION=2.8 LATEST=true
+  - VERSION=2.5
 
 before_install:
   - sudo add-apt-repository ppa:duggan/bats --yes
