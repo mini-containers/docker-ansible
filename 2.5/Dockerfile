@@ -1,10 +1,10 @@
 # Latest Python 2.x using latest Alpine 3.7
-FROM python:2-alpine3.7
+FROM python:2-alpine3.9
 
 # default playbook directory
 WORKDIR /data
 
-ENV ANSIBLE_VERSION 2.5.0
+ENV ANSIBLE_VERSION 2.5.15
 
 # install general runtime dependencies
 RUN set -ex \

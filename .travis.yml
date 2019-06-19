@@ -3,12 +3,8 @@ language: bash
 services: docker
 
 env:
+  - VERSION=2.8 LATEST=true
   - VERSION=2.5
-  - VERSION=2.4 LATEST=true
-  - VERSION=2.3
-  - VERSION=2.2
-  - VERSION=2.0
-  - VERSION=1.9
 
 before_install:
   - sudo add-apt-repository ppa:duggan/bats --yes
@@ -16,7 +12,6 @@ before_install:
   - sudo apt-get install -qq bats
 
 before_script:
-  - env | sort
   - export IMAGE="mini/ansible:${VERSION}"
 
 script:
@@ -24,7 +19,8 @@ script:
     (
       set -Eeuo pipefail
       set -x
-      travis_retry docker build -t "$IMAGE" $VERSION/
+      docker pull "$IMAGE" || true
+      travis_retry docker build --cache-from "$IMAGE" -t "$IMAGE" $VERSION/
       IMAGE=$IMAGE VERSION=$VERSION bats tests/
     )
 

@@ -1,10 +1,10 @@
-# Latest Python 2.x using Alpine
-FROM python:2-alpine
+# Latest Python 2.x using latest Alpine 3.9
+FROM python:2-alpine3.9
 
 # default playbook directory
 WORKDIR /data
 
-ENV ANSIBLE_VERSION 2.0.2
+ENV ANSIBLE_VERSION 2.8.1
 
 # install general runtime dependencies
 RUN set -ex \
@@ -19,7 +19,7 @@ RUN set -ex \
         && apk add --no-cache --virtual .build-deps \
                 gcc \
                 libffi-dev \
-                openssl-dev \
+                libressl-dev \
                 linux-headers \
                 make \
                 musl-dev \
